@@ -1,0 +1,31 @@
+<section class="offer">
+  <article class="offer__card" *ngFor="let offer of offers">
+    <img
+      [src]="image"
+      class="offer__image"
+      alt="surprise"
+    />
+    <p class="offer__text">
+      Requested amount: {{ offer.requestedAmount | spaceAdding }} ₽
+    </p>
+    <p class="offer__text">Total amount: {{ offer.totalAmount | spaceAdding }} ₽</p>
+    <p class="offer__text">For {{ offer.term }} months</p>
+    <p class="offer__text">
+      Monthly payment: {{ offer.monthlyPayment | mathRound | spaceAdding }} ₽
+    </p>
+    <p class="offer__text">Your rate: {{ offer.rate }}%</p>
+    <p class="offer__text">
+      Insurance included
+      <span
+        [class]="offer.isInsuranceEnabled ? 'offer__yes' : 'offer__no'"
+      ></span>
+    </p>
+    <p class="offer__text">
+      Salary client
+      <span [class]="offer.isSalaryClient ? 'offer__yes' : 'offer__no'"></span>
+    </p>
+    <button type="button" class="button" (click)="onSelect(offer)">
+      Select
+    </button>
+  </article>
+</section>

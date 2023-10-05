@@ -1,0 +1,49 @@
+<section class="promo-card">
+  <div class="promo-card__wrapper">
+    <h2 class="promo-card__title">Platinum digital credit card</h2>
+    <p class="promo-card__subtitle">
+      Our best credit card. Suitable for everyday spending and shopping. Cash
+      withdrawals and transfers without commission and interest.
+    </p>
+    <div class="promo-card__container">
+      <div
+        class="promo-card__text promo-card__text_bold"
+        (mouseover)="tooltip1 = true"
+        (mouseout)="tooltip1 = false"
+      >
+        Up to 160&nbsp;days
+        <span class="promo-card__text">No percent</span>
+        <div *ngIf="tooltip1" class="promo-card__tooltip">
+          When repaying the full debt up to 160 days.
+        </div>
+      </div>
+
+      <div
+        class="promo-card__text promo-card__text_bold"
+        (mouseover)="tooltip2 = true"
+        (mouseout)="tooltip2 = false"
+      >
+        Up to 600&nbsp;000&nbsp;₽
+        <span class="promo-card__text">Credit limit</span>
+        <div *ngIf="tooltip2" class="promo-card__tooltip">
+          Over the limit willaccrue percent.
+        </div>
+      </div>
+      <div
+        class="promo-card__text promo-card__text_bold"
+        (mouseover)="tooltip3 = true"
+        (mouseout)="tooltip3 = false"
+      >
+        0&nbsp;₽
+        <span class="promo-card__text">Card service is free</span>
+        <div *ngIf="tooltip3" class="promo-card__tooltip">
+          Promotion valid until December 31, 2022.
+        </div>
+      </div>
+    </div>
+    <button type="button" class="button" (click)="onClick()">
+      Apply for card
+    </button>
+  </div>
+  <div class="promo-card__image"></div>
+</section>

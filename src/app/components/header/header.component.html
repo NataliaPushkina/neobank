@@ -1,0 +1,78 @@
+<header class="header">
+  <a [routerLink]="['/']" class="header__logo">NeoBank</a>
+  <nav class="header__nav">
+    <ul class="header__nav-list">
+      <li class="header__nav-item">
+        <a
+          class="header__nav-link"
+          [routerLink]="['/loan']"
+          routerLinkActive="header__nav-link_active"
+          >Credit card</a
+        >
+      </li>
+      <li class="header__nav-item">
+        <a
+          class="header__nav-link"
+          [routerLink]="['/product']"
+          routerLinkActive="header__nav-link_active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Product</a
+        >
+      </li>
+      <li class="header__nav-item">
+        <a
+          class="header__nav-link"
+          [routerLink]="['/account']"
+          routerLinkActive="header__nav-link_active"
+          >Account</a
+        >
+      </li>
+      <li class="header__nav-item">
+        <a
+          class="header__nav-link"
+          [routerLink]="['/resources']"
+          routerLinkActive="header__nav-link_active"
+          >Resources</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <button type="button" class="button" (click)="showMessage()">Online Bank</button>
+
+  <div class="burger" (click)="toggle()">
+    <span class="burger__line burger__line_first"></span>
+    <span class="burger__line burger__line_second"></span>
+    <span class="burger__line burger__line_third"></span>
+  </div>
+
+  <ng-container class="burger-menu" *ngIf="isOpen">
+    <div class="burger-menu__container">
+      <div class="burger-menu__content">
+        <ul class="burger-menu__list">
+          <li class="burger-menu__item">
+            <a
+              class="burger-menu__link"
+              [routerLink]="['/loan']"
+              routerLinkActive="header__nav-link_active"
+              (click)="toggle()"
+              >Credit card</a
+            >
+          </li>
+          <li class="burger-menu__item">
+            <a class="burger-menu__link" href="#!">Product</a>
+          </li>
+          <li class="burger-menu__item">
+            <a class="burger-menu__link" href="#!">Account</a>
+          </li>
+          <li class="burger-menu__item">
+            <a class="burger-menu__link" href="#!">Resources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="burger__close" (click)="isOpen = false">
+      <span class="burger__close-line burger__close-line_first"></span>
+      <span class="burger__close-line burger__close-line_second"></span>
+    </div>
+  </ng-container>
+</header>

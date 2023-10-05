@@ -1,0 +1,173 @@
+<section class="application">
+  <div class="application__container">
+    <div class="user-info__column">
+      <div class="application__wrapper">
+        <h2 class="application__title">Customize your card</h2>
+        <p class="application__subtitle">Step 1 of 5</p>
+      </div>
+
+      <div class="user-info__select">
+        <h3 class="user-info__select-title">Select amount</h3>
+        <p class="user-info__select-title rangeValue" #refAmount>
+          {{ amount }}
+        </p>
+
+        <div class="range_box">
+          <input
+            class="form-control range"
+            name="amount"
+            [(ngModel)]="amount"
+            (mousemove)="setValue()"
+            type="range"
+            value="150000"
+            min="15000"
+            max="600000"
+            step="5000"
+          />
+        </div>
+        <div class="user-info__select-minmax">
+          <span class="user-info__select-min">15 000</span>
+          <span class="user-info__select-max">600 000</span>
+        </div>
+      </div>
+    </div>
+    <div class="user-info__info">
+      <h3 class="user-info__text">You have chosen the amount</h3>
+      <p class="user-info__subtitle">{{ amount }}</p>
+      <span class="user-info__line"></span>
+    </div>
+  </div>
+
+  <h3 class="application__text application__text_title">Contact Information</h3>
+  <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label class="form__label"
+        >Your last name
+        <span class="form__validation" *ngIf="checkValidity('lastName')">
+          *</span
+        >
+        <input
+          type="text"
+          class="form__input"
+          formControlName="lastName"
+          placeholder="For Example Doe"
+        />
+      </label>
+      <p *ngIf="checkValidity('lastName')" class="form__validation">
+        Enter your last name
+      </p>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your first name
+        <span class="form__validation" *ngIf="checkValidity('firstName')">
+          *</span
+        >
+        <input
+          type="text"
+          class="form__input"
+          formControlName="firstName"
+          placeholder="For Example Jhon"
+        />
+      </label>
+      <p *ngIf="checkValidity('firstName')" class="form__validation">
+        Enter your first name
+      </p>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your patronymic
+        <input
+          type="text"
+          class="form__input"
+          formControlName="middleName"
+          placeholder="For Example Victorovich"
+        />
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Select term
+        <select class="form-control form__input" formControlName="term">
+          <option *ngFor="let term of terms" [value]="term">
+            {{ term }} month
+          </option>
+        </select>
+      </label>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your email
+        <span class="form__validation" *ngIf="checkValidity('email')"> *</span>
+        <input
+          type="email"
+          class="form__input"
+          formControlName="email"
+          placeholder="test@gmail.com"
+        />
+      </label>
+      <p *ngIf="checkValidity('email')" class="form__validation">
+        Incorrect email address
+      </p>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your date of birth
+        <span class="form__validation" *ngIf="checkAge()"> *</span>
+        <input
+          type="date"
+          class="form__input"
+          formControlName="birthdate"
+          placeholder="Select Date and Time"
+        />
+      </label>
+      <p *ngIf="checkAge()" class="form__validation">Incorrect date of birth</p>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your passport series
+        <span class="form__validation" *ngIf="checkValidity('passportSeries')">
+          *</span
+        >
+        <input
+          type="text"
+          class="form__input"
+          formControlName="passportSeries"
+          placeholder="0000"
+        />
+      </label>
+      <p *ngIf="checkValidity('passportSeries')" class="form__validation">
+        The series must be 4 digits
+      </p>
+    </div>
+
+    <div class="form-control">
+      <label class="form__label"
+        >Your passport number
+        <span class="form__validation" *ngIf="checkValidity('passportNumber')">
+          *</span
+        >
+        <input
+          type="text"
+          class="form__input"
+          formControlName="passportNumber"
+          placeholder="000000"
+        />
+      </label>
+      <p *ngIf="checkValidity('passportNumber')" class="form__validation">
+        The series must be 6 digits
+      </p>
+    </div>
+    <div class="form__btn-container">
+      <button type="submit" class="button" [disabled]="form.invalid">
+        Continue
+      </button>
+    </div>
+  </form>
+</section>

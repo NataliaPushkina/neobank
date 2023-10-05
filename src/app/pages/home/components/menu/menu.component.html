@@ -1,0 +1,26 @@
+<section class="menu">
+  <ul class="menu__list">
+    <li class="menu__item">
+      <a class="link menu__link" href="#!">Support</a>
+    </li>
+    <li class="menu__item">
+      <a class="link menu__link" href="#!">Subscribe Newsletter &&nbspget</a>
+    </li>
+    <li class="menu__item">
+      <a class="link menu__link" href="#!">Bank News</a>
+    </li>
+  </ul>
+  <form class="menu__input-container" [formGroup]="form" (submit)="subscribe()">
+    <input
+      class="menu__input"
+      type="email"
+      placeholder="Your email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    />
+    <button type="submit" class="button menu__button" [disabled]="form.invalid">
+      Subscribe
+    </button>
+  </form>
+</section>

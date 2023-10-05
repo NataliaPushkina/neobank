@@ -1,0 +1,7 @@
+<section class="data-card-container">
+  <article *ngFor="let data of list" class="data-card">
+    <img [src]="data.image" class="data-card__image" [alt]="data.title" />
+    <h2 class="data-card__title">{{ data.title }}</h2>
+    <p class="data-card__subtitle">{{ data.subtitle }}</p>
+  </article>
+</section>

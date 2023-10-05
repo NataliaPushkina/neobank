@@ -1,0 +1,262 @@
+<section class="application">
+  <div class="application__container">
+    <div class="application__wrapper">
+      <h2 class="application__title">Continuation of the application</h2>
+      <p class="application__subtitle">Step 2 of 5</p>
+    </div>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-control">
+        <label class="form__label"
+          >What's your gender
+          <span class="form__validation" *ngIf="checkValidity('gender')">
+            *</span
+          >
+          <select class="form-control form__input" formControlName="gender">
+            <option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </option>
+          </select>
+        </label>
+        <p *ngIf="checkValidity('gender')" class="form__validation">
+          Select one of the options
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label class="form__label"
+          >Your marital status
+          <span class="form__validation" *ngIf="checkValidity('maritalStatus')">
+            *</span
+          >
+          <select
+            class="form-control form__input"
+            formControlName="maritalStatus"
+          >
+            <option *ngFor="let status of statuses" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </label>
+        <p *ngIf="checkValidity('maritalStatus')" class="form__validation">
+          Select one of the options
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label class="form__label"
+          >Your number of dependents
+          <span
+            class="form__validation"
+            *ngIf="checkValidity('dependentAmount')"
+          >
+            *</span
+          >
+          <select
+            class="form-control form__input"
+            formControlName="dependentAmount"
+          >
+            <option *ngFor="let number of dependentAmount" [value]="number">
+              {{ number }}
+            </option>
+          </select>
+        </label>
+        <p *ngIf="checkValidity('dependentAmount')" class="form__validation">
+          Select one of the options
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label class="form__label"
+          >Date of issue of the passport
+          <span
+            class="form__validation"
+            *ngIf="checkValidity('passportIssueDate')"
+          >
+            *</span
+          >
+          <input
+            type="date"
+            class="form__input"
+            formControlName="passportIssueDate"
+            placeholder="Select Date and Time"
+          />
+        </label>
+        <p *ngIf="checkValidity('passportIssueDate')" class="form__validation">
+          Incorrect date of passport issue date
+        </p>
+      </div>
+
+      <div class="form-control">
+        <label class="form__label"
+          >Division code
+          <span
+            class="form__validation"
+            *ngIf="checkValidity('passportIssueBranch')"
+          >
+            *</span
+          >
+          <input
+            type="text"
+            class="form__input"
+            formControlName="passportIssueBranch"
+            placeholder="000000"
+          />
+        </label>
+        <p
+          *ngIf="checkValidity('passportIssueBranch')"
+          class="form__validation"
+        >
+          The series must be 6 digits
+        </p>
+      </div>
+
+      <div class="form form__group" formGroupName="employment">
+        <div class="form form__group">
+          <h3 class="form__subtitle">Employment</h3>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Your employment status
+              <span
+                class="form__validation"
+                *ngIf="checkValidity('employmentStatus')"
+              >
+                *</span
+              >
+              <select
+                class="form-control form__input"
+                formControlName="employmentStatus"
+              >
+                <option
+                  *ngFor="let status of employmentStatuses"
+                  [value]="status"
+                >
+                  {{ status }}
+                </option>
+              </select>
+            </label>
+            <p
+              *ngIf="checkValidity('employmentStatus')"
+              class="form__validation"
+            >
+              Select one of the options
+            </p>
+          </div>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Division codeYour employer INN
+              <span
+                class="form__validation"
+                *ngIf="checkValidity('employerINN')"
+              >
+                *</span
+              >
+              <input
+                type="text"
+                class="form__input"
+                formControlName="employerINN"
+                placeholder="000000000000"
+              />
+            </label>
+            <p *ngIf="checkValidity('employerINN')" class="form__validation">
+              Department code must be 12 digits
+            </p>
+          </div>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Your salary
+              <span class="form__validation" *ngIf="checkValidity('salary')">
+                *</span
+              >
+              <input
+                type="text"
+                class="form__input"
+                formControlName="salary"
+                placeholder="For example 100 000"
+              />
+            </label>
+            <p *ngIf="checkValidity('salary')" class="form__validation">
+              Enter your salary
+            </p>
+          </div>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Your position
+              <span class="form__validation" *ngIf="checkValidity('position')">
+                *</span
+              >
+              <select
+                class="form-control form__input"
+                formControlName="position"
+              >
+                <option *ngFor="let position of positions" [value]="position">
+                  {{ position }}
+                </option>
+              </select>
+            </label>
+            <p *ngIf="checkValidity('position')" class="form__validation">
+              Select one of the options
+            </p>
+          </div>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Your work experience total
+              <span
+                class="form__validation"
+                *ngIf="checkValidity('workExperienceTotal')"
+              >
+                *</span
+              >
+              <input
+                type="text"
+                class="form__input"
+                formControlName="workExperienceTotal"
+                placeholder="For example 10"
+              />
+            </label>
+            <p
+              *ngIf="checkValidity('workExperienceTotal')"
+              class="form__validation"
+            >
+              Enter your work experience total
+            </p>
+          </div>
+
+          <div class="form-control">
+            <label class="form__label"
+              >Your work experience current
+              <span
+                class="form__validation"
+                *ngIf="checkValidity('workExperienceCurrent')"
+              >
+                *</span
+              >
+              <input
+                type="text"
+                class="form__input"
+                formControlName="workExperienceCurrent"
+                placeholder="For example 2"
+              />
+            </label>
+            <p
+              *ngIf="checkValidity('workExperienceCurrent')"
+              class="form__validation"
+            >
+              Enter your work experience current
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="form__btn-container">
+        <button type="submit" class="button" [disabled]="form.invalid">
+          Continue
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

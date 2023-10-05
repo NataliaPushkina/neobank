@@ -1,0 +1,90 @@
+<nav class="nav-card">
+  <ul class="nav-card__list">
+    <li
+      class="nav-card__item"
+      [class.active]="activeLink === 'About card'"
+      (click)="onClick('About card')"
+    >
+      About card
+    </li>
+    <li
+      class="nav-card__item"
+      [class.active]="activeLink === 'Rates and conditions'"
+      (click)="onClick('Rates and conditions')"
+    >
+      Rates and conditions
+    </li>
+    <li
+      class="nav-card__item"
+      [class.active]="activeLink === 'Cashback'"
+      (click)="onClick('Cashback')"
+    >
+      Cashback
+    </li>
+    <li
+      class="nav-card__item"
+      [class.active]="activeLink === 'FAQ'"
+      (click)="onClick('FAQ')"
+    >
+      FAQ
+    </li>
+  </ul>
+</nav>
+
+<div *ngIf="activeLink === 'About card'" class="nav-card__tab">
+  <app-data-cards [list]="listItems"></app-data-cards>
+</div>
+<div *ngIf="activeLink === 'Rates and conditions'" class="nav-card__tab">
+  <div class="nav-card__container nav-card__container_rates">
+    <p class="nav-card__header">Card currency</p>
+    <p class="nav-card__text">Rubles, dollars, euro</p>
+    <p class="nav-card__header">Interest free period</p>
+    <p class="nav-card__text">0% up to 160 days</p>
+    <p class="nav-card__header">Payment system</p>
+    <p class="nav-card__text">Mastercard, Visa</p>
+    <p class="nav-card__header">Maximum credit limit on the card</p>
+    <p class="nav-card__text">600 000 ₽</p>
+    <p class="nav-card__header">Replenishment and withdrawal</p>
+    <p class="nav-card__text">
+      At any ATM. Top up your credit card for free with cash or transfer from
+      other cards
+    </p>
+    <p class="nav-card__header">Max cashback per month</p>
+    <p class="nav-card__text">15 000 ₽</p>
+    <p class="nav-card__header">Transaction Alert</p>
+    <p class="nav-card__text">
+      Transaction Alert 60 ₽ — SMS or push notifications<br />
+      0 ₽ — card statement, information about transactions in the online bank
+    </p>
+  </div>
+</div>
+<div *ngIf="activeLink === 'Cashback'" class="nav-card__tab">
+  <div class="data-card-container">
+    <article
+      *ngFor="let data of listItems2"
+      class="data-card data-card_cashback"
+    >
+      <h2 class="data-card__title data-card__title_cashback">
+        {{ data.title }}
+      </h2>
+      <p class="data-card__subtitle data-card__subtitle_cashback">
+        {{ data.subtitle }}
+      </p>
+    </article>
+  </div>
+</div>
+<div *ngIf="activeLink === 'FAQ'" class="nav-card__tab">
+  <h2 class="application__title application__title_FAQ">
+    Issuing and receiving a card
+  </h2>
+  <details *ngFor="let item of FAQList" class="details__container">
+    <summary class="details__summary">{{ item.title }}</summary>
+    {{ item.info }}
+  </details>
+
+  <h2 class="application__title application__title_FAQ">Using a credit card</h2>
+  <details *ngFor="let item of FAQList2" class="details__container">
+    <summary class="details__summary">{{ item.title }}</summary>
+    {{ item.info }}
+  </details>
+</div>
