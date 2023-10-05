@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-loan-id-page',
@@ -11,10 +12,7 @@ export class LoanIdPageComponent {
   info: boolean = false;
   isApproved: boolean = false;
 
-  constructor(
-    private apiService: ApiService,
-    private router: Router
-  ) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   sendForm(data: any) {
     this.apiService.putApplicationById(data).subscribe(() => {
@@ -22,7 +20,15 @@ export class LoanIdPageComponent {
     });
 
     setTimeout(() => {
-      this.router.navigate(['/']);
+      this.apiService
+        .getApplicationsById(data.applicationId)
+        .pipe(map((application) => application.status))
+        .subscribe((status) => {
+          console.log(status);
+          if (status === 'CC_DENIED') {
+            this.router.navigate(['/']);
+          } else this.router.navigate([`/loan/${data.applicationId}/document`]);
+        });
     }, 10000);
   }
 }

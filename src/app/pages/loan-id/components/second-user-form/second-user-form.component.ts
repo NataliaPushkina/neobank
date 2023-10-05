@@ -58,7 +58,6 @@ export class SecondUserFormComponent {
   }
 
   onSubmit() {
-    console.log('submit')
     if (this.form.valid) {
       const formData = {
         ...this.form.value,

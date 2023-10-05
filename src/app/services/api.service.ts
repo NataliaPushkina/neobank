@@ -138,6 +138,12 @@ export class ApiService {
       .pipe(catchError((err) => this.handleError(err)));
   }
 
+  getApplicationsById(id: number): Observable<any> {
+    return this.http
+      .get(`${this.server}/admin/application/${id}`, this.header)
+      .pipe(catchError((err) => this.handleError(err)));
+  }
+
   handleError(err: any) {
     if (err.status == 500) {
       console.log('Ошибка сервера, попробуйте чуть позже');
