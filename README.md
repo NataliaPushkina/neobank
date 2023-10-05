@@ -1,27 +1,24 @@
 # AngularNeobank
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+**Запуск проекта** 
+- npm install
+- ng serve
+- перейти на `http://localhost:4200/`
+- docker-compose up – build запустить контейнер (backend)
 
-## Development server
+**Макет**
+https://neostudy.neoflex.ru/my/courses.php
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+*Логика работы*
+1. Пользователь заполняет форму (prescoring) на странице loan и после отправки данных создаётся уникальный id заявки.
+2. Начинается обработка prescoring заявки и есть она проходит, то пользователю становятся доступны 4 предложения на выбор (loanOffer) с разными условиями (например без страховки, со страховкой, с зарплатным клиентом, со страховкой и зарплатным клиентом).
+3. Пользователь выбирает одно из предложений и отправляется запрос, после чего его заявка сохраняется.
+4. После создание пользователю показывается сообщение о том, что необходимо дождаться ответа по заявке на почту.
+5. На почту клиенту приходит письмо с текстом "Ваша заявка предварительно одобрена, завершите оформление".
+6. В письме клиент переходит на страницу loan/id и заполняет вторую форму, где указывает свои паспортные данные и работу. После отправки формы, показывается сообщение, что ответ по заявке придёт на почту. Также сразу после отправки запускается таймер на 10 секунд и  происходит редирект на главную страницу.
+7. Происходит scoring данных, бэкенд рассчитывает все данные по кредиту (ПСК, график платежей и тд). После валидации данных пользователю приходит письмо на почту с одобрением или отказом. Если кредит одобрен, то в письме присутствует ссылка на запрос "Сформировать документы", loan/id/document.
+8. Перейдя по ссылке пользователь отрисовывается график платежей от первого до последнего месяца, если пользователь согласен, он нажимает на checkbox и отправляет документы на формирование, после на этой странице показывается текст, что необходимо перейти в почту.
+9. Пользователю на почту приходят документы для подписания и ссылку на запрос на согласие с условиями. При переходе по ссылке loan/id/document/sign пользователь нажимает на checkbox и отправляет документы на подписание. Пользователь может отказаться от условий или согласиться. После отправки опять показывается надпись с предложением перейти в почту.
+10. Если пользователь согласился, то на почту отправляется код подтверждения, при переходе на loan/id/code пользователь вводит code. Если введённый код неверный, то показывается сообщение с ошибкой. Если полученный код совпадает с отправленными, то выводится экран с поздравлением и оформление кредита заканчивается.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+/loan -> loan/:id -> loan/:id/document -> loan/:id/document/sign -> loan/:id/code
