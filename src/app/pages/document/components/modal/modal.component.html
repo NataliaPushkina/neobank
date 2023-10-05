@@ -1,0 +1,22 @@
+<section class="modal">
+  <div class="modal__content">
+    <h2 class="modal__title">
+      {{ title }}<span (click)="close.emit()">&times;</span>
+    </h2>
+    <p class="modal__subtitle">{{ subtitle }}</p>
+
+    <div class="buttons-container buttons-container_modal">
+      <button
+        *ngIf="visible"
+        type="button"
+        (click)="nextModal.emit()"
+        class="button button_deny"
+      >
+        Deny
+      </button>
+      <button type="button" (click)="close.emit()" class="button button_send">
+        {{ btnText }}
+      </button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+<app-code
+  *ngIf="step === 'code'"
+  (sendCode)="sendCode($event)"
+  [mistake]="mistake"
+></app-code>
+<app-finish *ngIf="step === 'message'"></app-finish>

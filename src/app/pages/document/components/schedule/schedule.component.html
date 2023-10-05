@@ -1,0 +1,60 @@
+<section class="application">
+  <div class="application__wrapper application__wrapper_schedule">
+    <h2 class="application__title">Payment Schedule</h2>
+    <p class="application__subtitle">Step 3 of 5</p>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>NUMBER <span> &#9660;</span></th>
+        <th>DATE <span> &#9660;</span></th>
+        <th>TOTAL PAYMENT <span> &#9660;</span></th>
+        <th>INTEREST PAYMENT <span> &#9660;</span></th>
+        <th>DEBT PAYMENT <span> &#9660;</span></th>
+        <th>REMAINING DEBT <span> &#9660;</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.number }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.totalPayment }}</td>
+        <td>{{ item.interestPayment }}</td>
+        <td>{{ item.debtPayment }}</td>
+        <td>{{ item.remainingDebt }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form class="buttons-container" [formGroup]="form" (submit)="onSubmit()">
+    <button type="button" (click)="modal = true" class="button button_deny">
+      Deny
+    </button>
+    <div class="form-control">
+      <input type="checkbox" name="agree" formControlName="isChecked" />
+      <label for="agree">I agree with the payment schedule</label>
+      <button
+        type="submit"
+        class="button button_send"
+        [disabled]="this.form.value.isChecked == null"
+      >
+        Send
+      </button>
+    </div>
+  </form>
+</section>
+
+<app-modal
+  *ngIf="modal"
+  subtitle="You exactly sure, you want to cancel this application?"
+  (close)="modal = false"
+  (nextModal)="nextModal()"
+  [visible]="true"
+></app-modal>
+
+<app-modal
+  *ngIf="next"
+  subtitle="Your application has been deny!"
+  btnText="Go home"
+  (close)="goHome()"
+></app-modal>

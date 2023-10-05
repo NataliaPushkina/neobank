@@ -1,0 +1,52 @@
+<div class="info">
+  <h2 class="info__title">Please enter confirmation code</h2>
+  <form [formGroup]="form">
+    <div class="code__inputs">
+      <input
+        type="number"
+        required="true"
+        class="code__input"
+        formControlName="first"
+        #first
+        (ngModelChange)="toNext(2)"
+        pattern="[0-9]{1}"
+        max="9"
+        min="0"
+      />
+      <input
+        type="number"
+        required="true"
+        class="code__input"
+        formControlName="second"
+        #second
+        (ngModelChange)="toNext(3)"
+        pattern="[0-9]{1}"
+        max="9"
+        min="0"
+      />
+      <input
+        type="number"
+        required="true"
+        class="code__input"
+        formControlName="third"
+        #third
+        (ngModelChange)="toNext(4)"
+        pattern="[0-9]{1}"
+        max="9"
+        min="0"
+      />
+      <input
+        type="number"
+        required="true"
+        class="code__input"
+        formControlName="last"
+        #last
+        (ngModelChange)="toNext(5)"
+        pattern="[0-9]{1}"
+        max="9"
+        min="0"
+      />
+    </div>
+    <p class="code__error" *ngIf="mistake">Invalid confirmation code</p>
+  </form>
+</div>

@@ -1,0 +1,12 @@
+<app-schedule
+  (nextStep)="toStepMessage()"
+  *ngIf="step === 'document'"
+></app-schedule>
+<div class="offer-message offer-message_form" *ngIf="step === 'message'">
+  <h2 class="application__title application__title_offer">
+    Documents are formed
+  </h2>
+  <p class="offer-message__subtitle">
+    Documents for signing will be sent to your email
+  </p>
+</div>
