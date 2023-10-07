@@ -3,6 +3,8 @@ import { CodeComponent } from './components/code/code.component';
 import { FinishComponent } from './components/finish/finish.component';
 import { ApiService } from 'src/app/services/api.service';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-code-page',
@@ -13,24 +15,44 @@ import { CommonModule } from '@angular/common';
 export class CodePageComponent {
   step: string = 'code';
   mistake: boolean = false;
+  applicationId!: number;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    protected route: ActivatedRoute,
+    protected router: Router
+  ) {}
 
-  ngOnInit(): void {}
-
-  sendCode(data: any) {
-    const myAp = data.applicationId;
-    this.apiService.getAllApplications().subscribe((res) => {
-      let result = res.filter((v: { id: any }) => v.id == myAp);
-      if (result[0].sesCode == Object.values(data.code).join('')) {
-        this.apiService.postCode(data).subscribe(() => {
-          console.log('Код отправлен');
-          this.step = 'message';
-        });
-      } else {
-        console.log('Неправильный пароль');
-        this.mistake = true;
-      }
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.applicationId = params['applicationId'];
     });
   }
+
+  sendCode(codeStr: string) {
+    this.apiService
+      .getApplicationsById(this.applicationId)
+      .pipe(map((application) => application.sesCode))
+      .subscribe((code) => {
+        console.log(code);
+        if (code === codeStr) {
+          this.apiService.postCode(code).subscribe(() => {
+            this.step = 'message';
+          });
+        } else {
+          this.mistake = true;
+        }
+      });
+  }
+
+  // sendCode(data: any) {
+  //   this.statusService
+  //     .checkStatus(this.applicationId)
+  //     .subscribe((status) => {
+  //       switch(status) {
+  //         case Status.CREDIT_ISSUED:
+  //           this.router.navigate(['/'])
+  //       }
+  //     });
+  // }
 }

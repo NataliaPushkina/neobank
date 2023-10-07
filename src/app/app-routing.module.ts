@@ -8,18 +8,23 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { DocumentPageComponent } from './pages/document/document-page.component';
 import { SignPageComponent } from './pages/sign/sign-page.component';
 import { CodePageComponent } from './pages/code/code-page.component';
+import { statusGuard } from './status.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'loan', component: LoanPageComponent },
   { path: 'loan/:applicationId', component: LoanIdPageComponent },
-  { path: 'loan/:applicationId/document', component: DocumentPageComponent },
+  {
+    path: 'loan/:applicationId/document',
+    component: DocumentPageComponent,
+    canActivate: [statusGuard],
+  },
   { path: 'loan/:applicationId/document/sign', component: SignPageComponent },
   { path: 'loan/:applicationId/code', component: CodePageComponent },
   { path: 'product', component: NotReadyPageComponent },
   { path: 'account', component: NotReadyPageComponent },
   { path: 'resources', component: NotReadyPageComponent },
-  { path: '**', pathMatch: 'full', component: NotFoundPageComponent }
+  { path: '**', pathMatch: 'full', component: NotFoundPageComponent },
 ];
 
 @NgModule({

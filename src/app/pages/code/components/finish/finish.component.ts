@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./finish.component.scss']
 })
 export class FinishComponent {
- image: string = "../../../../assets/images/surprise.png"
+ image: string = "../../../../../assets/images/surprise.png"
 }

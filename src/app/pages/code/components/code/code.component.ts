@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -42,12 +49,7 @@ export class CodeComponent {
     } else if (n === 4) {
       this.last.nativeElement.focus();
     } else {
-      const formData = {
-        code: this.form.value,
-        applicationId: this.applicationId,
-      };
-      console.log(formData);
-      this.sendCode.emit(formData);
+      this.sendCode.emit(Object.values(this.form.value).join(''));
     }
   }
 }
