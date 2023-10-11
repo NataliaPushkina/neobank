@@ -8,19 +8,23 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { DocumentPageComponent } from './pages/document/document-page.component';
 import { SignPageComponent } from './pages/sign/sign-page.component';
 import { CodePageComponent } from './pages/code/code-page.component';
-import { statusGuard } from './status.guard';
+import { statusGuard } from './guards/status.guard';
+import { documentGuard } from './guards/document.guard';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'loan', component: LoanPageComponent },
-  { path: 'loan/:applicationId', component: LoanIdPageComponent },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
   {
-    path: 'loan/:applicationId/document',
-    component: DocumentPageComponent,
-    canActivate: [statusGuard],
+    path: 'loan', loadComponent: () => import('./pages/loan/loan-page.component').then(mod => mod.LoanPageComponent)  },
+  {
+    path: 'loan/:applicationId',
+    loadChildren: () => import('./pages/loan-id/loan-id.module').then(mod => mod.LoanIdModule)
   },
-  { path: 'loan/:applicationId/document/sign', component: SignPageComponent },
-  { path: 'loan/:applicationId/code', component: CodePageComponent },
+  {
+    path: 'loan/:applicationId/document', loadComponent: () => import('./pages/document/document-page.component').then(mod => mod.DocumentPageComponent),
+    canActivate: [documentGuard],
+  },
+  { path: 'loan/:applicationId/document/sign', loadComponent: () => import('./pages/sign/sign-page.component').then(mod => mod.SignPageComponent), canActivate: [statusGuard] },
+  { path: 'loan/:applicationId/code', loadComponent: () => import('./pages/code/code-page.component').then(mod => mod.CodePageComponent), canActivate: [statusGuard] },
   { path: 'product', component: NotReadyPageComponent },
   { path: 'account', component: NotReadyPageComponent },
   { path: 'resources', component: NotReadyPageComponent },

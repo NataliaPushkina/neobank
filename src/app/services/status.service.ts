@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable, Subject, Subscription, map } from 'rxjs';
+import { Observable, Subject, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 export enum Status {
   //отклонен

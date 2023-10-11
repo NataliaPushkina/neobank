@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
+import { BASE_URL_TOKEN } from '../config';
 
 export interface Prescoring {
   term: number;
@@ -43,14 +44,16 @@ export interface Offer {
   providedIn: 'root',
 })
 export class ApiService {
-  server: string = 'http://localhost:8080';
   header = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(BASE_URL_TOKEN) private baseUrl: string
+  ) { }
 
   getNews(): Observable<any> {
     return this.http.get('https://rickandmortyapi.com/api/character/?page=18');
@@ -61,13 +64,13 @@ export class ApiService {
   }
 
   subscribeEmail(email: string): Observable<any> {
-    return this.http.post(`${this.server}/email`, email);
+    return this.http.post(`${this.baseUrl}/email`, email);
   }
 
   postApplication(data: Prescoring): Observable<Prescoring> {
     return this.http
       .post<Prescoring>(
-        `${this.server}/application`,
+        `${this.baseUrl}/application`,
         JSON.stringify(data),
         this.header
       )
@@ -76,7 +79,7 @@ export class ApiService {
 
   postApply(data: Offer): Observable<Offer> {
     return this.http.post<Offer>(
-      `${this.server}/application/apply`,
+      `${this.baseUrl}/application/apply`,
       JSON.stringify(data),
       this.header
     );
@@ -85,7 +88,7 @@ export class ApiService {
   putApplicationById(data: any): Observable<UserInfo> {
     return this.http
       .put<any>(
-        `${this.server}/application/registration/${data.applicationId}`,
+        `${this.baseUrl}/application/registration/${data.applicationId}`,
         JSON.stringify(data),
         this.header
       )
@@ -94,26 +97,26 @@ export class ApiService {
 
   postDocument(applicationId: number): Observable<any> {
     return this.http
-      .post<any>(`${this.server}/document/${applicationId}`, null, this.header)
+      .post<any>(`${this.baseUrl}/document/${applicationId}`, null, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   postDeny(id: number): Observable<any> {
     return this.http
-      .post<any>(`${this.server}/application/${id}/deny`, null, this.header)
+      .post<any>(`${this.baseUrl}/application/${id}/deny`, null, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   postSign(id: number): Observable<any> {
     return this.http
-      .post<any>(`${this.server}/document/${id}/sign`, { id }, this.header)
+      .post<any>(`${this.baseUrl}/document/${id}/sign`, { id }, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   postCode(data: any) {
     return this.http
       .post<any>(
-        `${this.server}/document/${data.applicationId}/sign/code`,
+        `${this.baseUrl}/document/${data.applicationId}/sign/code`,
         Object.values(data.code).join(''),
         this.header
       )
@@ -122,25 +125,25 @@ export class ApiService {
 
   getScheduler(id: number): Observable<any> {
     return this.http
-      .get(`${this.server}/admin/application/${id}`, this.header)
+      .get(`${this.baseUrl}/admin/application/${id}`, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   getAuditAll(): Observable<any> {
     return this.http
-      .get(`${this.server}/admin/audit/all`, this.header)
+      .get(`${this.baseUrl}/admin/audit/all`, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   getAllApplications(): Observable<any> {
     return this.http
-      .get(`${this.server}/admin/application`, this.header)
+      .get(`${this.baseUrl}/admin/application`, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   getApplicationsById(id: number): Observable<any> {
     return this.http
-      .get(`${this.server}/admin/application/${id}`, this.header)
+      .get(`${this.baseUrl}/admin/application/${id}`, this.header)
       .pipe(catchError((err) => this.handleError(err)));
   }
 

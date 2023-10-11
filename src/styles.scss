@@ -1,25 +1,28 @@
 @import url("./SCSS/fonts.scss");
 
-$text-header-color: #1c1c1e;
-$text-nav-color: #1d1929;
-$active-link: #b2a35f;
-$main-btn-color: #003cff;
-$text-features-color: #4f5665;
-$bg-hover: #7796c0;
 
-%font-ubuntu {
-  font-family: "Ubuntu", "Arial", sans-serif;
-}
-%font-rubik {
-  font-family: "Rubik", "Arial", sans-serif;
-}
-%font-nunito {
-  font-family: "Nunito Sans", "Arial", sans-serif;
-}
+  $text-header-color: #1c1c1e;
+  $text-nav-color: #1d1929;
+  $active-link: #b2a35f;
+  $main-btn-color: #003cff;
+  $text-features-color: #4f5665;
+  $bg-hover: #7796c0;
+  
+  %font-ubuntu {
+    font-family: "Ubuntu", "Arial", sans-serif;
+  }
+  %font-rubik {
+    font-family: "Rubik", "Arial", sans-serif;
+  }
+  %font-nunito {
+    font-family: "Nunito Sans", "Arial", sans-serif;
+  }
+  
+  $desktop: 1300px;
+  $tablet: 920px;
+  $mobile: 500px;
 
-$desktop: 1300px;
-$tablet: 920px;
-$mobile: 500px;
+
 
 @mixin section-width {
   box-sizing: border-box;
@@ -1616,3 +1619,6 @@ details[open] summary::after {
 }
 
 @import "./SCSS/media.scss";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

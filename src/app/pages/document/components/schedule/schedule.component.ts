@@ -47,6 +47,7 @@ export class ScheduleComponent {
       isChecked: new FormControl(null),
     });
     this.route.params.subscribe((params: Params) => {
+      console.log(params['applicationId'])
       this.applicationId = params['applicationId'];
     });
     this.apiService.getScheduler(this.applicationId).subscribe((data) => {

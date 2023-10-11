@@ -1,22 +1,26 @@
-<app-promo-card (toApplication)="toApplication()"></app-promo-card>
-<app-nav-card></app-nav-card>
-<app-steps></app-steps>
-<div #application></div>
-<app-first-user-form
-  *ngIf="stepService.step === 1"
-  (postApplication)="postApplication($event)"
-></app-first-user-form>
-<app-offers
-  *ngIf="stepService.step === 2"
-  [offers]="offers"
-  (postApply)="postApply($event)"
-></app-offers>
-<div class="offer-message" *ngIf="stepService.step === 3">
-  <h2 class="application__title application__title_offer">
-    The preliminary decision has been sent to your email.
-  </h2>
-  <p class="offer-message__subtitle">
-    In the letter you can get acquainted with the preliminary decision on the
-    credit card.
-  </p>
+<div *ngIf="!isLoading">
+  <app-promo-card (toApplication)="toApplication()"></app-promo-card>
+  <app-nav-card></app-nav-card>
+  <app-steps></app-steps>
+  <div #application></div>
+  <app-first-user-form
+    *ngIf="stepService.step === 1"
+    (postApplication)="postApplication($event)"
+  ></app-first-user-form>
+  <app-offers
+    *ngIf="stepService.step === 2"
+    [offers]="offers"
+    (postApply)="postApply($event)"
+  ></app-offers>
+  <div class="offer-message" *ngIf="stepService.step === 3">
+    <h2 class="application__title application__title_offer">
+      The preliminary decision has been sent to your email.
+    </h2>
+    <p class="offer-message__subtitle">
+      In the letter you can get acquainted with the preliminary decision on the
+      credit card.
+    </p>
+  </div>
 </div>
+
+<app-loader *ngIf="isLoading"></app-loader>

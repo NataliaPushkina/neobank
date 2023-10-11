@@ -5,10 +5,7 @@ import { NewsArticleComponent } from '../news-article/news-article.component';
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [
-    CommonModule, 
-    NewsArticleComponent
-  ],
+  imports: [CommonModule, NewsArticleComponent],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss'],
 })

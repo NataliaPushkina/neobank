@@ -52,7 +52,6 @@ export class SecondUserFormComponent {
       }),
     });
     this.route.params.subscribe((params: Params) => {
-      console.log(params['applicationId'])
       this.applicationId = params['applicationId'];
     });
   }

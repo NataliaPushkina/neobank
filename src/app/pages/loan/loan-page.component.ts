@@ -8,6 +8,8 @@ import { OffersComponent } from './components/offers/offers.component';
 import { ApiService } from 'src/app/services/api.service';
 import { StepService } from 'src/app/services/step.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
+import { provideRouter } from '@angular/router';
 
 @Component({
   selector: 'app-loan-page',
@@ -20,12 +22,17 @@ import { HttpClientModule } from '@angular/common/http';
     StepsComponent,
     FirstUserFormComponent,
     OffersComponent,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    LoaderComponent
+  ]
 })
 export class LoanPageComponent {
+
   @ViewChild('application', { static: true }) application!: ElementRef;
+
   offers: any = [];
+  isLoading: boolean = false;
+
   constructor(
     protected stepService: StepService,
     private apiService: ApiService
@@ -33,16 +40,22 @@ export class LoanPageComponent {
   
 
   postApplication(data: any) {
+    this.isLoading = true;
     this.apiService.postApplication(data).subscribe((res) => {
       this.offers = res;
       this.stepService.nextStep();
-    });
+    },
+      () => { },
+    () => this.isLoading = false);
   }
 
   postApply(data: any) {
+    this.isLoading = true;
     this.apiService.postApply(data).subscribe(() => {
       this.stepService.nextStep();
-    });
+    },
+    () => { },
+    () => this.isLoading = false);
   }
 
   toApplication() {

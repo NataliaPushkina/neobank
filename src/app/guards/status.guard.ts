@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { inject } from '@angular/core';
-import { StatusService } from './services/status.service';
+import { StatusService } from '../services/status.service';
 
 export const statusGuard = (
   route: ActivatedRouteSnapshot,

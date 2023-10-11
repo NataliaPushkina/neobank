@@ -1,9 +1,14 @@
-<app-second-user-form
-  (sendForm)="sendForm($event)"
-  *ngIf="!info"
-></app-second-user-form>
-<app-info
-  *ngIf="info"
-  title="Wait for a decision on the application"
-  subtitle="The answer will come to your mail within 10 minutes"
-></app-info>
+<div *ngIf="!isLoading">
+  <app-second-user-form
+    (sendForm)="sendForm($event)"
+    *ngIf="!info"
+  ></app-second-user-form>
+  <app-info
+    *ngIf="info"
+    title="Wait for a decision on the application"
+    subtitle="The answer will come to your mail within 10 minutes"
+  ></app-info>
+</div>
+
+<app-loader *ngIf="isLoading"></app-loader>
+<!-- <router-outlet></router-outlet> -->

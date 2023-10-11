@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   imports: [],
 })
 export class NotReadyPageComponent {
-    image: string = '../../../assets/images/oops.png'
+  image: string = '../../../assets/images/oops.png'
+
+  constructor(private location: Location) {}
+  
+  goBack() {
+    this.location.back();
+  }
+
 }
